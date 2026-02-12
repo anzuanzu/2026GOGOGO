@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>板橋區聯營開門紅 - 整合績效系統</title>
+    <link rel="stylesheet" href="整合績效系統.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-trophy"></i> 板橋區聯營開門紅 整合績效系統</h1>
+            <div class="date-info">
+                <span>目標期間：2025年12月 - 2026年11月</span>
+                <span class="update-time" id="lastUpdate">最後更新：載入中...</span>
+            </div>
+        </header>
+
+        <!-- 總體績效統計 -->
+        <section class="overview-section">
+            <h2><i class="fas fa-chart-bar"></i> 三家分行總體績效</h2>
+            <div class="stats-grid">
+                <div class="stat-card total">
+                    <h3>總目標金額</h3>
+                    <div class="amount" id="grandTotalTarget">30,000萬</div>
+                </div>
+                <div class="stat-card current">
+                    <h3>已完成金額</h3>
+                    <div class="amount" id="grandTotalAchieved">0萬</div>
+                </div>
+                <div class="stat-card remaining">
+                    <h3>剩餘目標</h3>
+                    <div class="amount" id="grandTotalRemaining">30,000萬</div>
+                </div>
+                <div class="stat-card progress">
+                    <h3>達成率</h3>
+                    <div class="amount" id="grandTotalProgress">0%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 各分行績效對比 -->
+        <section class="branch-comparison">
+            <h2><i class="fas fa-building"></i> 各分行績效對比</h2>
+            <div class="branch-cards">
+                <!-- 板橋分行 -->
+                <div class="branch-card" id="banqiao-card">
+                    <div class="branch-header">
+                        <h3><i class="fas fa-store"></i> 板橋分行</h3>
+                        <span class="loading-indicator">載入中...</span>
+                    </div>
+                    <div class="branch-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">目標</span>
+                            <span class="stat-value" id="banqiao-target">12,000萬</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">已達成</span>
+                            <span class="stat-value achieved" id="banqiao-achieved">0萬</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">達成率</span>
+                            <span class="stat-value progress" id="banqiao-progress">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="banqiao-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="branch-rm-count">
+                        <i class="fas fa-users"></i> <span id="banqiao-rm-count">11</span> 位理專
+                    </div>
+                </div>
+
+                <!-- 華江分行 -->
+                <div class="branch-card" id="huajiang-card">
+                    <div class="branch-header">
+                        <h3><i class="fas fa-store"></i> 華江分行</h3>
+                        <span class="loading-indicator">載入中...</span>
+                    </div>
+                    <div class="branch-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">目標</span>
+                            <span class="stat-value" id="huajiang-target">6,000萬</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">已達成</span>
+                            <span class="stat-value achieved" id="huajiang-achieved">0萬</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">達成率</span>
+                            <span class="stat-value progress" id="huajiang-progress">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="huajiang-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="branch-rm-count">
+                        <i class="fas fa-users"></i> <span id="huajiang-rm-count">6</span> 位理專
+                    </div>
+                </div>
+
+                <!-- 新板分行 -->
+                <div class="branch-card" id="xinban-card">
+                    <div class="branch-header">
+                        <h3><i class="fas fa-store"></i> 新板分行</h3>
+                        <span class="loading-indicator">載入中...</span>
+                    </div>
+                    <div class="branch-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">目標</span>
+                            <span class="stat-value" id="xinban-target">12,000萬</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">已達成</span>
+                            <span class="stat-value achieved" id="xinban-achieved">0萬</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">達成率</span>
+                            <span class="stat-value progress" id="xinban-progress">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="xinban-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="branch-rm-count">
+                        <i class="fas fa-users"></i> <span id="xinban-rm-count">10</span> 位理專
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 理專績效排行榜 -->
+        <section class="ranking-section">
+            <h2><i class="fas fa-medal"></i> 理專績效排行榜 TOP 10</h2>
+            <div class="filters">
+                <select id="rankingType">
+                    <option value="amount">依金額排行</option>
+                    <option value="progress">依達成率排行</option>
+                </select>
+                <select id="branchFilter">
+                    <option value="all">所有分行</option>
+                    <option value="banqiao">板橋分行</option>
+                    <option value="huajiang">華江分行</option>
+                    <option value="xinban">新板分行</option>
+                </select>
+            </div>
+            <div class="ranking-list" id="rankingList">
+                <!-- 由 JavaScript 動態生成 -->
+            </div>
+        </section>
+
+        <!-- 各分行理專詳細績效 -->
+        <section class="rm-details-section">
+            <h2><i class="fas fa-users"></i> 各分行理專詳細績效</h2>
+
+            <!-- 分行切換標籤 -->
+            <div class="branch-tabs">
+                <button class="tab-btn active" onclick="switchBranchTab('banqiao')">
+                    <i class="fas fa-store"></i> 板橋分行
+                </button>
+                <button class="tab-btn" onclick="switchBranchTab('huajiang')">
+                    <i class="fas fa-store"></i> 華江分行
+                </button>
+                <button class="tab-btn" onclick="switchBranchTab('xinban')">
+                    <i class="fas fa-store"></i> 新板分行
+                </button>
+            </div>
+
+            <!-- 板橋分行理專 -->
+            <div id="banqiao-rm-tab" class="rm-tab-content active">
+                <h3>板橋分行理專績效</h3>
+                <div class="rm-grid" id="banqiao-rm-grid">
+                    <!-- 由 JavaScript 動態生成 -->
+                </div>
+            </div>
+
+            <!-- 華江分行理專 -->
+            <div id="huajiang-rm-tab" class="rm-tab-content">
+                <h3>華江分行理專績效</h3>
+                <div class="rm-grid" id="huajiang-rm-grid">
+                    <!-- 由 JavaScript 動態生成 -->
+                </div>
+            </div>
+
+            <!-- 新板分行理專 -->
+            <div id="xinban-rm-tab" class="rm-tab-content">
+                <h3>新板分行理專績效</h3>
+                <div class="rm-grid" id="xinban-rm-grid">
+                    <!-- 由 JavaScript 動態生成 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 月度統計 -->
+        <section class="monthly-section">
+            <h2><i class="fas fa-calendar-alt"></i> 開門紅月度統計 (2025年12月 - 2026年2月)</h2>
+            <div class="month-stats">
+                <div class="month-card">
+                    <h3>2025年12月</h3>
+                    <div class="month-amount" id="december-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="december-finance">0萬</span></span>
+                        <span>保險：<span id="december-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="december-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="december-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="december-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年1月</h3>
+                    <div class="month-amount" id="january-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="january-finance">0萬</span></span>
+                        <span>保險：<span id="january-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="january-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="january-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="january-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年2月</h3>
+                    <div class="month-amount" id="february-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="february-finance">0萬</span></span>
+                        <span>保險：<span id="february-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="february-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="february-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="february-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 各月份業績統計 (2026年3月 - 2026年11月) -->
+        <section class="monthly-section">
+            <h2><i class="fas fa-chart-bar"></i> 各月份業績統計 (2026年3月 - 2026年11月)</h2>
+            <div class="month-stats">
+                <div class="month-card">
+                    <h3>2026年3月</h3>
+                    <div class="month-amount" id="march-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="march-finance">0萬</span></span>
+                        <span>保險：<span id="march-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="march-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="march-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="march-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年4月</h3>
+                    <div class="month-amount" id="april-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="april-finance">0萬</span></span>
+                        <span>保險：<span id="april-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="april-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="april-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="april-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年5月</h3>
+                    <div class="month-amount" id="may-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="may-finance">0萬</span></span>
+                        <span>保險：<span id="may-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="may-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="may-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="may-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年6月</h3>
+                    <div class="month-amount" id="june-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="june-finance">0萬</span></span>
+                        <span>保險：<span id="june-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="june-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="june-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="june-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年7月</h3>
+                    <div class="month-amount" id="july-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="july-finance">0萬</span></span>
+                        <span>保險：<span id="july-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="july-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="july-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="july-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年8月</h3>
+                    <div class="month-amount" id="august-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="august-finance">0萬</span></span>
+                        <span>保險：<span id="august-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="august-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="august-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="august-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年9月</h3>
+                    <div class="month-amount" id="september-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="september-finance">0萬</span></span>
+                        <span>保險：<span id="september-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="september-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="september-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="september-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年10月</h3>
+                    <div class="month-amount" id="october-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="october-finance">0萬</span></span>
+                        <span>保險：<span id="october-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="october-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="october-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="october-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <h3>2026年11月</h3>
+                    <div class="month-amount" id="november-total">0萬</div>
+                    <div class="month-breakdown">
+                        <span>理財：<span id="november-finance">0萬</span></span>
+                        <span>保險：<span id="november-insurance">0萬</span></span>
+                    </div>
+                    <div class="month-branch-detail">
+                        <div class="branch-detail-item">
+                            <span>板橋：</span><span id="november-banqiao">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>華江：</span><span id="november-huajiang">0萬</span>
+                        </div>
+                        <div class="branch-detail-item">
+                            <span>新板：</span><span id="november-xinban">0萬</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 重新載入按鈕 -->
+        <div class="reload-section">
+            <button onclick="reloadAllData()" class="reload-btn">
+                <i class="fas fa-sync-alt"></i> 重新載入所有數據
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy, onSnapshot, where } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+        // 板橋分行 Firebase 配置
+        const banqiaoConfig = {
+            apiKey: "AIzaSyC6FgsBHdN-7Y-MMEz95UplnYF3qT_kFEc",
+            authDomain: "banqiaowin.firebaseapp.com",
+            projectId: "banqiaowin",
+            storageBucket: "banqiaowin.firebasestorage.app",
+            messagingSenderId: "438387834260",
+            appId: "1:438387834260:web:dcee9c47831b9113ed2381"
+        };
+
+        // 華江分行 Firebase 配置
+        const huajiangConfig = {
+            apiKey: "AIzaSyBIIb3ZrabmNfLdKurCGZATkyfDEbxJPUI",
+            authDomain: "huajiangwin.firebaseapp.com",
+            projectId: "huajiangwin",
+            storageBucket: "huajiangwin.firebasestorage.app",
+            messagingSenderId: "916982407278",
+            appId: "1:916982407278:web:32326feaa376ae7e69867f"
+        };
+
+        // 新板分行 Firebase 配置
+        const xinbanConfig = {
+            apiKey: "AIzaSyB5wDffwXhlTb9kN2fMooxNx1RSLnXRUFU",
+            authDomain: "iamrich-2e22a.firebaseapp.com",
+            projectId: "iamrich-2e22a",
+            storageBucket: "iamrich-2e22a.firebasestorage.app",
+            messagingSenderId: "459249969031",
+            appId: "1:459249969031:web:48e36c98bb632cff555522"
+        };
+
+        // 初始化三個 Firebase 應用
+        const banqiaoApp = initializeApp(banqiaoConfig, "banqiao");
+        const huajiangApp = initializeApp(huajiangConfig, "huajiang");
+        const xinbanApp = initializeApp(xinbanConfig, "xinban");
+
+        const banqiaoDB = getFirestore(banqiaoApp);
+        const huajiangDB = getFirestore(huajiangApp);
+        const xinbanDB = getFirestore(xinbanApp);
+
+        // 設置全域變數
+        window.databases = {
+            banqiao: banqiaoDB,
+            huajiang: huajiangDB,
+            xinban: xinbanDB
+        };
+
+        window.firestoreActions = {
+            collection,
+            getDocs,
+            query,
+            orderBy,
+            onSnapshot,
+            where
+        };
+
+        window.dispatchEvent(new Event('firebaseReady'));
+        console.log('三個 Firebase 資料庫初始化完成');
+    </script>
+    <script src="整合績效系統.js"></script>
+</body>
+</html>
